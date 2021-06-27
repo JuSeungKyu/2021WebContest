@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sub</title>
+    
+    <style>
+        body{
+            background-color: black;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        #game{
+            width: 850px;
+            display: flex;
+            margin: auto
+        }
+        canvas{
+            color: #070719;
+            background-color: white;
+            border: 1px solid black
+        }
+        #interface{
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../source/yeah.jpg);
+            background-position: top;
+            background-size: cover;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #interface P{
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <section id="game">
+        <canvas id="tutorial" width="500" height="700"></canvas>
+        <div id="interface">
+            <p id="score">score : 0</p>
+            <p id="life">life : 5</p>
+            <p>Z를 눌러 시작이나<br>
+                공격을 해주세요</p>
+        </div>
+    </section>
+    <script src="./SubEvent.js"></script>
+</body>
+</html>

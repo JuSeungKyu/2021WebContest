@@ -1,0 +1,21 @@
+stage2
+  - bgm
+  - bg
+boss finish bonus
+boss time limit
+spell card finish bonus
+vanish bullet
+
+enemy variation
+Boss effect
+Game pad API
+
+separate count up from run step?
+
+enemy beam collision
+multi power items
+
+divide area
+sin, cos, tan cache
+
+network

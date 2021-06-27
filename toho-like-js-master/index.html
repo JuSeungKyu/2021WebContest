@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Toho like shooting with JavaScript</title>
+<script type="text/javascript" src="lib/glMatrix-0.9.5.min.js"></script>
+<script type="text/javascript" src="utility/Inherit.js"></script>
+<script type="text/javascript" src="utility/Draw.js"></script>
+<script type="text/javascript" src="utility/Random.js"></script>
+<script type="text/javascript" src="utility/FreeList.js"></script>
+<script type="text/javascript" src="utility/WebGL.js"></script>
+<script type="text/javascript" src="utility/Peer.js"></script>
+<script type="text/javascript" src="data/danmaku_helper.js"></script>
+<script type="text/javascript" src="data/bullets_params.js"></script>
+<script type="text/javascript" src="data/enemies_params.js"></script>
+<script type="text/javascript" src="data/bosses_params.js"></script>
+<script type="text/javascript" src="data/talk_params.js"></script>
+<script type="text/javascript" src="data/stage_params.js"></script>
+<script type="text/javascript" src="source/GameSocket.js"></script>
+<script type="text/javascript" src="source/Game.js"></script>
+<script type="text/javascript" src="source/MoveVector.js"></script>
+<script type="text/javascript" src="source/Element.js"></script>
+<script type="text/javascript" src="source/Background.js"></script>
+<script type="text/javascript" src="source/Fighter.js"></script>
+<script type="text/javascript" src="source/FighterOption.js"></script>
+<script type="text/javascript" src="source/Enemy.js"></script>
+<script type="text/javascript" src="source/Boss.js"></script>
+<script type="text/javascript" src="source/Effect.js"></script>
+<script type="text/javascript" src="source/Bullet.js"></script>
+<script type="text/javascript" src="source/Bomb.js"></script>
+<script type="text/javascript" src="source/EnemyBullet.js"></script>
+<script type="text/javascript" src="source/Item.js"></script>
+<script type="text/javascript" src="source/SpellCard.js"></script>
+<script type="text/javascript" src="source/GameState.js"></script>
+<script type="text/javascript" src="source/LoadingState.js"></script>
+<script type="text/javascript" src="source/OpeningState.js"></script>
+<script type="text/javascript" src="source/CharacterSelectState.js"></script>
+<script type="text/javascript" src="source/ReplaySelectState.js"></script>
+<script type="text/javascript" src="source/PostReplayState.js"></script>
+<script type="text/javascript" src="source/StageState.js"></script>
+<script type="text/javascript" src="source/EndingState.js"></script>
+<script type="text/javascript" src="source/StaffRollState.js"></script>
+<script type="text/javascript">
+
+var __game ;
+
+var init = function( ) {
+  var mainCanvas = document.getElementById( 'mainCanvas' ) ;
+  var bgCanvas = document.getElementById('bgCanvas');
+  var game = new Game(mainCanvas, bgCanvas);
+  __game = game ;
+  window.onkeydown = function(event) { game.handleKeyDown(event); };
+  window.onkeyup = function(event) { game.handleKeyUp(event); };
+  game.run( ) ;
+} ;
+
+</script>
+</head>
+
+<body onLoad="init( )">
+
+<div id="canvasdiv" style="position:relative; width:640px; height:480px">
+<canvas id="mainCanvas" width="640" height="480"
+ style="z-index: 2; position:absolute;left0px;top0px;"></canvas>
+<canvas id="bgCanvas" width="480" height="480"
+ style="z-index: 1; position:absolute;left0px;top0px;"></canvas>
+</div>
+
+</body>
+</html>

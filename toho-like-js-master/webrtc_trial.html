@@ -1,0 +1,125 @@
+<html>
+<head>
+<script type="text/javascript" src="utility/Peer.js"></script>
+<script type="text/javascript">
+var peer;
+//var wsURL = 'ws://localhost:5000';
+var wsURL = 'wss://boiling-anchorage-5279.herokuapp.com/';
+var callButton, startButton;
+
+function Tester(room) {
+  this.fpsDiv = document.getElementById('fps');
+  this.statusDiv = document.getElementById('status');
+  this.oldDate = Date.now();
+
+  this.peer = new Peer(room, wsURL, this);
+  this.peer.createPeerConnection();
+  this.running = false;
+  this.count = 0;
+
+  var self = this;
+  this.runStepFunc = function() {self.runStep();};
+};
+
+
+Tester.prototype.offer = function() {
+  this.peer.offer();
+};
+
+
+Tester.prototype.run = function() {
+  this.running = true;
+  this.runStep();
+};
+
+
+Tester.prototype.runStep = function() {
+  if(this.count % 60 == 0) {
+    var newDate = Date.now();
+    var fps = (1000 * 60 / (newDate - this.oldDate) | 0);
+    var text = '@' + this.count + ': ' + fps;
+    this.fpsDiv.innerText = text;
+    this.oldDate = newDate;
+  }
+
+  this.send((Math.random() * 4) | 0);
+  this.count++;
+};
+
+
+var keys = {
+  'id': 'sync', // temporal
+  'key': 0xFF
+};
+
+Tester.prototype.send = function(data) {
+//  this.peer.send(data);
+  this.peer.send(keys);
+};
+
+
+Tester.prototype.receiveFromPeer = function(data) {
+  if(! this.running)
+    return;
+  requestAnimationFrame(this.runStepFunc);
+};
+
+
+Tester.prototype.notifyWsReady = function(event) {
+  callButton.disabled = false;
+};
+
+
+Tester.prototype.notifyOpenPeer = function(event) {
+  this.statusDiv.innerText = 'connected';
+  callButton.disabled = true;
+  startButton.disabled = false;
+};
+
+
+Tester.prototype.notifyClosePeer = function(event) {
+  this.statusDiv.innerText = 'disconnected';
+};
+
+
+var tester;
+
+function __init() {
+  // TODO: temporal
+  var array = location.href.split('?');
+  if(array.length <= 1) {
+    location.href = array[0] + '?' + ((Math.random() * 10000) | 0);
+    return -1;
+  }
+  var room = parseInt(array[1]);
+  document.getElementById('room').innerText = room;
+
+  tester = new Tester(room);
+  callButton = document.getElementById('callButton');
+  startButton = document.getElementById('startButton');
+  callButton.disabled = true;
+  startButton.disabled = true;
+}
+
+function __call() {
+  tester.offer();
+  callButton.disabled = true;
+}
+
+function __start() {
+  tester.run();
+  startButton.disabled = true;
+}
+
+</script>
+</head>
+<body onload="__init()">
+
+Room No <span id="room"></span>
+<button id="callButton" onclick="__call()">call</button>
+<button id="startButton" onclick="__start()">start</button>
+<br>
+<span id="fps"></span> fps
+<div id="status"></div>
+</body>
+</html>
