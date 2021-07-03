@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+header{
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2rem;
+    background-color: rgba(213, 213, 213, 0.7);
+}
+
+header ul{
+    width: 50%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header li{
+    font-size: 0.9rem;
+    width: 30%;
+    text-align: center;
+    position: relative;
+    color: rgba(0, 0, 0, 0.671);
+}
+
+header li a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.header-span{
+    position: absolute;
+    right: 0;
+}
+
+#visual{
+    width: 100%;
+    height: 30vw;
+    overflow: hidden;
+    position: relative;
+}
+
+#visual .text{
+    width: 35%;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+#visual .text h1{
+    font-size: 3vw;
+    font-weight: 900;
+}
+
+#visual .text h2{
+    font-size: 1.8vw;
+}
+
+#visual .img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid rgba(128, 128, 128, 0.418);
+}
+
+#visual .img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+}
+
+#visual .img img:nth-child(1){
+    animation: visuaImg1Control 9s infinite;
+    animation-delay: 0s;
+}
+
+#visual .img img:nth-child(2){
+    animation: visuaImg2Control 9s infinite;
+    animation-delay: 3s;
+}
+
+#visual .img img:nth-child(3){
+    animation: visuaImg3Control 9s infinite;
+    animation-delay: 6s;
+}
+
+@keyframes visuaImg1Control {
+    0%{
+        opacity: 0;
+        object-position: center 20%;
+    }
+    3.3%{
+        opacity: 1;
+        object-position: center 15%;
+    }
+    33.3%{
+        opacity: 1;
+    }
+    36.6%{
+        opacity: 0;
+        object-position: center 12%;
+    }
+    100%{
+        opacity: 0;
+        object-position: center 20%;
+    }
+}
+@keyframes visuaImg2Control {
+    0%{
+        opacity: 0;
+        object-position: center 40%;
+    }
+    3.3%{
+        opacity: 1;
+        object-position: center 30%;
+    }
+    33.3%{
+        opacity: 1;
+    }
+    36.6%{
+        opacity: 0;
+        object-position: center 27%;
+    }
+    100%{
+        opacity: 0;
+        object-position: center 40%;
+    }
+}
+@keyframes visuaImg3Control {
+    0%{
+        opacity: 0;
+        object-position: center 15%;
+    }
+    3.3%{
+        opacity: 1;
+        object-position: center 20%;
+    }
+    33.3%{
+        opacity: 1;
+    }
+    36.6%{
+        opacity: 0;
+        object-position: center 23%;
+    }
+    100%{
+        opacity: 0;
+        object-position: center 15%;
+    }
+}
+
+.introduction{
+    width: 100vw;
+    display: grid;
+    padding: 10% 20%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4%;
+}
+
+#old{
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.introduction .box{
+    background-color: white;
+    height: 17vw;
+    padding: 5%;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vw;
+    border: 1px solid rgba(128, 128, 128, 0.22);
+    transition: 0.4s;
+}
+
+.introduction .box:hover{
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.introduction .box:nth-child(1) img{
+    width: 40%;
+    height: 40%;
+    object-fit: contain;
+}
+
+.title-img{
+    width: 100%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.introduction h1{
+    font-size: 1.2vw;
+}
+
+.introduction p{
+    font-size: 0.9vw;
+}
+
+#new{
+    background-image: linear-gradient(#E6EBF100, #E6EBF1 10% 90%, #E6EBF100);
+    grid-template-rows: repeat(5, 1fr);
+}

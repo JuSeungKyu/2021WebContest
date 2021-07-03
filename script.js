@@ -3,7 +3,6 @@ function scrool_check() {
     let web_height = document.querySelector('#height').clientHeight;
 
     let scroll = current_scroll / web_height
-    console.log(scroll)
 
     if (scroll >= 0 && scroll <= 0.09 && !a) {
         allOff()
@@ -98,8 +97,8 @@ function content3On() {
     let content = document.querySelector('#content3')
     content.style.opacity = 1;
     setTimeout(() => {
-        content.querySelector('.background').style.opacity = 0.5
-        content.querySelector('.background').style.objectPosition = '50% 50%'
+        content.querySelector('.background').style.opacity = 0.2
+        content.querySelector('.background').style.objectPosition = '50% 15%'
     }, 200);
     setTimeout(() => {
         content.querySelectorAll('*:not(.background)').forEach(x=>x.style.opacity = 1)
@@ -109,7 +108,7 @@ function content3On() {
 function content3Off() {
     let content = document.querySelector('#content3')
     content.style.opacity = 0;
-    content.querySelector('.background').style.objectPosition = '50% 0%'
+    content.querySelector('.background').style.objectPosition = '50% 60%'
     content.querySelectorAll('*').forEach(x=>x.style.opacity = 0)
 }
 
@@ -137,7 +136,7 @@ function content5On() {
     content.style.opacity = 1;
     setTimeout(() => {
         content.querySelector('.background').style.opacity = 0.6
-        content.querySelector('.background').style.objectPosition = '50% 10%'
+        content.querySelector('.background').style.objectPosition = '50% 50%'
     }, 700);
     setTimeout(() => {
         content.querySelectorAll('*:not(.background)').forEach(x=>x.style.opacity = 1)
@@ -147,6 +146,6 @@ function content5On() {
 function content5Off() {
     let content = document.querySelector('#content5')
     content.style.opacity = 0;
-    content.querySelector('.background').style.objectPosition = '50% 100%'
+    content.querySelector('.background').style.objectPosition = '50% 0%'
     content.querySelectorAll('*').forEach(x=>x.style.opacity = 0)
 }

@@ -2,6 +2,9 @@ let score = 0;
 let canvas
 let ctx
 let bufCanvas
+let bufCtx
+let bulletCanvas
+let bulletCtx
 let drawObject = []
 let playerBullet = []
 let bossBullet = []
@@ -11,23 +14,33 @@ let interval = []
 
 const playerImg = []
 const bossImg = []
+const bulletImg = []
 const img1 = new Image()
-img1.src = "../source/img.jpg"
+const backgroundImage = new Image()
 
 window.onload = () => {
 
+    img1.src = "../source/img.jpg"
+    backgroundImage.src = "./imgs/bg2.png"
     for (let i = 1; i <= 24; i += 1) {
-        // 플레이어 (레이센 우동게인 이나바) 사진 준비
+        // 플레이어 사진 준비
         let img = new Image()
         img.src = './imgs/player/images/' + '우동게인_' + (i <= 9 ? '0' + i : i) + '.png'
         playerImg[i - 1] = img
     }
 
     for (let i = 1; i <= 28; i += 1) {
-        // 적 보스 (야타데라 나루미)) 사진 준비
+        // 적 보스 사진 준비
         let img = new Image()
         img.src = './imgs/boss/images/' + '1_' + (i <= 9 ? '0' + i : i) + '.png'
         bossImg[i - 1] = img
+    }
+
+    for (let i = 1; i <= 144; i += 1) {
+        // 탄환 사진 준비
+        let img = new Image()
+        img.src = './imgs/bullet/images/' + 'bullet_' + (i <= 9 ? '0' + i : i) + '.png'
+        bulletImg[i - 1] = img
     }
 
     console.log("load")
@@ -39,13 +52,6 @@ window.onload = () => {
         document.querySelector('#interface').innerHTML = `<p>현재 브라우저에서 게임을 실행할 수 없습니다`
         return
     }
-
-    // 버퍼 캔버스
-    bufCanvas = document.createElement("canvas");
-    bufCtx = bufCanvas.getContext("2d");
-
-    bufCanvas.width = canvas.width;
-    bufCanvas.height = canvas.height;
 
     gameSet()
 
@@ -64,7 +70,39 @@ window.onload = () => {
 }
 
 function gameSet() {
+    // 버퍼 캔버스
+    bufCanvas = document.createElement("canvas");
+    bufCtx = bufCanvas.getContext("2d");
+
+    bufCanvas.width = canvas.width;
+    bufCanvas.height = canvas.height;
+
+    // 탄환 캔버스 (탄환을 회전하고 그 캔버스를 붙여넣을때 사용)
+    bulletCanvas = document.createElement("canvas");
+    bulletCtx = bufCanvas.getContext("2d");
+
+    bulletCanvas.width = canvas.width;
+    bulletCanvas.height = canvas.height;
+
     drawObject = [
+        {
+            'name': 'background1',
+            'speed': 10,
+            'x': -100,
+            'y': 0,
+            'sizeX': 700,
+            'sizeY': 800,
+            'image': backgroundImage
+        },
+        {
+            'name': 'background2',
+            'speed': 10,
+            'x': -100,
+            'y': -800,
+            'sizeX': 700,
+            'sizeY': 800,
+            'image': backgroundImage
+        },
         {
             'name': 'player',
             'hp': 99999999999,
@@ -86,7 +124,7 @@ function gameSet() {
             'sizeX': 50,
             'sizeY': 80,
             'image': bossImg[0]
-        },
+        }
     ]
 }
 
@@ -97,8 +135,9 @@ function gameStart() {
     interval[2] = setInterval(cleaning, 2000)
     interval[3] = setInterval(bulletControl, 10);
     interval[4] = setInterval(playerBulletShooting, 80)
-    interval[5] = setInterval(isContant, 10)
+    interval[5] = setInterval(isContant, 15)
     interval[6] = setInterval(bossControl, 3000)
+    interval[7] = setInterval(backgroundControl, 10)
 
     bulletSet1()
     playerImageChange(0)
@@ -131,7 +170,7 @@ function cleaning() {
             bossBullet.splice(i, 1)
         }
     }
-    for (let i = 0; i < drawObject.length; i += 1) {
+    for (let i = 2; i < drawObject.length; i += 1) {
         // 화면 밖으로 나간 오브젝트 삭제
         if (drawObject[i].x > canvas.width + 150 || drawObject[i].y > canvas.height + 150 || drawObject[i].x < -150 || drawObject[i].y < -150) {
             drawObject.splice(i, 1)
@@ -141,21 +180,40 @@ function cleaning() {
 
 function drawFrame() {
     // 초기화
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    bufCtx.clearRect(0, 0, bufCanvas.width, bufCanvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     drawObject.forEach(x => {
         bufCtx.drawImage(x.image, x.x, x.y, x.sizeX, x.sizeY);
     })
+
     playerBullet.forEach(x => {
         bufCtx.drawImage(x.image, x.x, x.y, x.sizeX, x.sizeY);
     })
+
     bossBullet.forEach(x => {
-        bufCtx.drawImage(x.image, x.x, x.y, x.sizeX, x.sizeY);
+        bufCtx.drawImage(x.image, x.x, x.y, x.sizeX, x.sizeY)
     })
 
     // 화면에 출력
     ctx.drawImage(bufCanvas, 0, 0);
-    bufCtx.clearRect(0, 0, bufCanvas.width, bufCanvas.height);
+}
+
+function backgroundControl() {
+    // 배경을 무한 반복함
+    drawObject.forEach(x => {
+        if (x.name == 'background1') {
+            x.y += x.speed
+            if(x.y > 800){
+                x.y = -780
+            }
+        } else if (x.name == 'background2') {
+            x.y += x.speed
+            if(x.y > 800){
+                x.y = -780
+            }
+        }
+    })
 }
 
 function playerImageChange(n) {
@@ -263,11 +321,11 @@ function playerBulletShooting() {
     playerBullet.push({
         'name': 'playerBullet',
         'speed': 15,
-        'x': drawObject[point].x + drawObject[point].sizeX / 2 - 4,
+        'x': drawObject[point].x + drawObject[point].sizeX / 2 - 10,
         'y': drawObject[point].y,
-        'sizeX': 8,
-        'sizeY': 8,
-        'image': img1,
+        'sizeX': 20,
+        'sizeY': 20,
+        'image': bulletImg[132],
         'isContant': false
     })
 }
@@ -313,7 +371,7 @@ function bulletSet1() {
     }
 
     // 원형으로 발사
-    for (let i = Math.random() * 6; i <= 360; i += 6) {
+    for (let i = Math.random() * 10; i <= 360; i += 10) {
         x = Math.cos(i) * 3.5;
         y = Math.sin(i) * 3.5;
 
@@ -321,11 +379,12 @@ function bulletSet1() {
             'name': 'bossBullet',
             'speedX': x,
             'speedY': y,
-            'x': drawObject[point].x + drawObject[point].sizeX / 2 - 4,
+            'x': drawObject[point].x + drawObject[point].sizeX / 2 - 8,
             'y': drawObject[point].y + drawObject[point].sizeY / 2,
-            'sizeX': 8,
-            'sizeY': 8,
-            'image': img1,
+            'sizeX': 20,
+            'sizeY': 20,
+            'rotate' : i,
+            'image': bulletImg[33],
             'isContant': false
         })
     }
@@ -336,6 +395,7 @@ function bulletSet1() {
         setTimeout(bulletSet2, 600)
     }
 }
+
 function bulletSet2() {
     // 패턴 2
     let point = 0;
@@ -356,7 +416,8 @@ function bulletSet2() {
         'y': -10,
         'sizeX': 8,
         'sizeY': 8,
-        'image': img1,
+        'rotate' : 1,
+        'image': bulletImg[50],
         'isContant': false
     })
 
@@ -388,9 +449,10 @@ function bulletSet3() {
         'speedY': 0,
         'x': 0,
         'y': Math.random() * 810,
-        'sizeX': 5,
+        'sizeX': 10,
         'sizeY': 5,
-        'image': img1,
+        'rotate' : 1,
+        'image': bulletImg[55],
         'isContant': false
     })
 }
@@ -414,7 +476,7 @@ function bulletSet4() {
         'y': -10,
         'sizeX': 200,
         'sizeY': 10,
-        'image': img1,
+        'image': bulletImg[35],
         'patternCheck': false,
         'isContant': false
     })
@@ -425,7 +487,6 @@ function bulletSet4() {
         setTimeout(bulletSet2, 600)
     }
 }
-
 
 function isContant() {
     // 충돌체크
@@ -444,20 +505,28 @@ function isContant() {
 }
 
 function positionChecking(item, item2) {
-    if (item2.x + item2.sizeX >= item.x + 10 && item2.x <= item.x + item.sizeX - 10 && item2.y + item2.sizeY >= item.y + 20 && item2.y <= item.y + item.sizeY - 20) {
+    // 충돌 판정
+    if (item2.x + item2.sizeX >= item.x && item2.x <= item.x + item.sizeX && item2.y + item2.sizeY >= item.y && item2.y <= item.y + item.sizeY) {
         if (item2.isContant) {
             return
         }
-        item2.isContant = true;
-
-        item.hp -= 10
         if (item.name == 'player') {
+            if(!(item2.x + item2.sizeX >= item.x + 15 && item2.x <= item.x + item.sizeX - 15 && item2.y + item2.sizeY >= item.y + 25 && item2.y <= item.y + item.sizeY - 25)){
+                return
+            }
             document.querySelector('#life').innerHTML = 'life : ' + item.hp
+            score -= ((score-2000)>=0?2000:score)
             bossBullet = []
         } else {
             score += 100
-            document.querySelector('#score').innerHTML = 'score : ' + score
         }
+
+        // 충돌된 객체를 바로 지우기 위하여 실행
+        cleaning()
+
+        item2.isContant = true;
+        item.hp -= 50
+        document.querySelector('#score').innerHTML = 'score : ' + score
 
         if (item.hp <= 0) {
             for (let i = 0; i < drawObject.length; i += 1) {
@@ -465,12 +534,12 @@ function positionChecking(item, item2) {
                     drawObject.splice(i, 1);
                 }
                 if (item.name == 'player') {
+                    // player hp가 0 이하면 중지
                     gameOver()
                     document.querySelector('#life').innerHTML = 'Game Over'
                 }
             }
         }
-        cleaning()
     }
 }
 
@@ -488,16 +557,15 @@ function bossControl() {
 
     isBossMove = true
     bossMove(point, drawObject[point].speed)
-
-    bossDirection = bossDirection > 3 ? 0 : bossDirection + 1
 }
 
 function bossMove(point, n) {
-    drawObject[point].x += n * (bossDirection == 0 ? 1 : bossDirection == 1 ? -1 : bossDirection == 2 ? -1 : 1)
+    drawObject[point].x += n * (bossDirection == 0 ? 1 : bossDirection == 1 ? 1 : bossDirection == 6 ? 1 : bossDirection == 7 ? 1 : -1)
 
     if (n > 0) {
         setTimeout(bossMove, 10, point, n - 0.05)
     } else {
+        bossDirection = bossDirection > 6 ? 0 : bossDirection + 1
         isBossMove = false
     }
 }
@@ -509,14 +577,14 @@ function bossImageChange(n, replay) {
                 x.image = bossImg[n]
             }
         })
-        if(n>5){
+        if (n > 5) {
             replay = true
-        } else if(n < 1){
+        } else if (n < 1) {
             replay = false
         }
 
         setTimeout(bossImageChange, 70, replay ? n - 1 : n + 1, replay)
-    } else if (bossDirection == 1 || bossDirection == 2) {
+    } else if (bossDirection == 2 || bossDirection == 3 || bossDirection == 4 || bossDirection == 5) {
         setTimeout(bossLeftImageChange, 10, 14)
     } else {
         setTimeout(bossRightImageChange, 10, 7)
@@ -525,7 +593,6 @@ function bossImageChange(n, replay) {
 
 function bossLeftImageChange(n) {
     if (isBossMove) {
-        console.log(n+1 +"##")
         drawObject.forEach(x => {
             if (x.name == 'boss') {
                 x.image = bossImg[n]
@@ -539,7 +606,6 @@ function bossLeftImageChange(n) {
 
 function bossRightImageChange(n) {
     if (isBossMove) {
-        console.log(n+1)
         drawObject.forEach(x => {
             if (x.name == 'boss') {
                 x.image = bossImg[n]

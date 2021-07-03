@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sub</title>
+    <title>동방-게임</title>
     
     <style>
         body{
             background-color: black;
+            min-height: 99vh;
             max-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
         #game{
-            width: 850px;
+            width: 800px;
             display: flex;
-            margin: auto
         }
         canvas{
             color: #070719;
+            background-image: url(./imgs/bg2.png);
             background-color: white;
             border: 1px solid black
         }
         #interface{
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../source/yeah.jpg);
-            background-position: top;
-            background-size: cover;
-            width: 350px;
+            background-color: rgb(26, 95, 95);
+            width: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
