@@ -20,7 +20,7 @@ const backgroundImage = new Image()
 
 window.onload = () => {
 
-    img1.src = "../source/img.jpg"
+    img1.src = "imgs/img.jpg"
     backgroundImage.src = "./imgs/bg2.png"
     for (let i = 1; i <= 24; i += 1) {
         // 플레이어 사진 준비
@@ -48,6 +48,7 @@ window.onload = () => {
     canvas = document.querySelector('canvas')
     if (canvas.getContext) {
         ctx = canvas.getContext('2d');
+        ctx.save();
     } else {
         document.querySelector('#interface').innerHTML = `<p>현재 브라우저에서 게임을 실행할 수 없습니다`
         return
@@ -87,7 +88,7 @@ function gameSet() {
     drawObject = [
         {
             'name': 'background1',
-            'speed': 10,
+            'speed': 4,
             'x': -100,
             'y': 0,
             'sizeX': 700,
@@ -96,7 +97,7 @@ function gameSet() {
         },
         {
             'name': 'background2',
-            'speed': 10,
+            'speed': 4,
             'x': -100,
             'y': -800,
             'sizeX': 700,
@@ -105,7 +106,7 @@ function gameSet() {
         },
         {
             'name': 'player',
-            'hp': 99999999999,
+            'hp': 5,
             'score': 0,
             'speed': 5,
             'x': 220,
@@ -148,6 +149,18 @@ function gameOver() {
     interval.forEach(x => {
         clearInterval(x)
     })
+
+    document.querySelector('#explanation').innerHTML = 'Game Over'
+}
+
+function gameClear() {
+    drawFrame()
+
+    interval.forEach(x => {
+        clearInterval(x)
+    })
+
+    document.querySelector('#explanation').innerHTML = 'Game Clear'
 }
 
 function cleaning() {
@@ -178,7 +191,14 @@ function cleaning() {
     }
 }
 
+let isDrawing = false
+
 function drawFrame() {
+    // if(isDrawing){
+    //     return
+    // }
+    // isDrawing = true
+
     // 초기화
     bufCtx.clearRect(0, 0, bufCanvas.width, bufCanvas.height)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -197,6 +217,8 @@ function drawFrame() {
 
     // 화면에 출력
     ctx.drawImage(bufCanvas, 0, 0);
+
+    // isDrawing = false
 }
 
 function backgroundControl() {
@@ -204,12 +226,12 @@ function backgroundControl() {
     drawObject.forEach(x => {
         if (x.name == 'background1') {
             x.y += x.speed
-            if(x.y > 800){
+            if (x.y > 800) {
                 x.y = -780
             }
         } else if (x.name == 'background2') {
             x.y += x.speed
-            if(x.y > 800){
+            if (x.y > 800) {
                 x.y = -780
             }
         }
@@ -335,28 +357,37 @@ function bulletControl() {
         // 플레이어 탄환은 앞으로만 이동
         x.y -= x.speed
     })
-    bossBullet.forEach(x => {
+    for (let i = 0; i < bossBullet.length; i++) {
         // 나아가던 방향으로 계속 나아감
-        x.x -= x.speedX
-        x.y -= x.speedY
+        bossBullet[i].x -= bossBullet[i].speedX
+        bossBullet[i].y -= bossBullet[i].speedY
+        if (bossBullet[i].name != 'bossBullet') {
+            if (bossBullet[i].name == 'bossBullet2') {
+                if (bossBullet[i].patternCheck) {
+                    bossBullet[i].sizeX += 1
+                    bossBullet[i].sizeY -= 1
+                    if (bossBullet[i].sizeY <= 50) {
+                        bossBullet[i].patternCheck = false
+                    }
+                } else {
+                    bossBullet[i].sizeX -= 1
+                    bossBullet[i].sizeY += 1
+                    if (bossBullet[i].sizeX <= 50) {
+                        bossBullet[i].patternCheck = true
+                    }
+                }
+            } else if (bossBullet[i].name == 'bossBullet3' && !bossBullet[i].isExplosion) {
+                if (parseInt(Math.random() * 2000) == 1) {
+                    bossBullet[i].isExplosion = true
+                    bullet3Control(i)
+                }
+            } else if (bossBullet[i].name == 'bossBullet4' && !bossBullet[i].isExplosion) {
+                bossBullet[i].isExplosion = true
 
-        if (x.name == 'bossBullet2') {
-            console.log(x.sizeX)
-            if (x.patternCheck) {
-                x.sizeX += 1
-                x.sizeY -= 1
-                if (x.sizeY <= 10) {
-                    x.patternCheck = false
-                }
-            } else {
-                x.sizeX -= 1
-                x.sizeY += 1
-                if (x.sizeX <= 10) {
-                    x.patternCheck = true
-                }
+                bullet4Explosion(i)
             }
         }
-    })
+    }
 }
 
 function bulletSet1() {
@@ -371,9 +402,9 @@ function bulletSet1() {
     }
 
     // 원형으로 발사
-    for (let i = Math.random() * 10; i <= 360; i += 10) {
-        x = Math.cos(i) * 3.5;
-        y = Math.sin(i) * 3.5;
+    for (let i = parseInt(Math.random() * 10); i <= 360; i += 10) {
+        let x = Math.cos(i) * 3.5;
+        let y = Math.sin(i) * 3.5;
 
         bossBullet.push({
             'name': 'bossBullet',
@@ -383,8 +414,8 @@ function bulletSet1() {
             'y': drawObject[point].y + drawObject[point].sizeY / 2,
             'sizeX': 20,
             'sizeY': 20,
-            'rotate' : i,
-            'image': bulletImg[33],
+            'rotate': i,
+            'image': bulletImg[32],
             'isContant': false
         })
     }
@@ -416,7 +447,7 @@ function bulletSet2() {
         'y': -10,
         'sizeX': 8,
         'sizeY': 8,
-        'rotate' : 1,
+        'rotate': 1,
         'image': bulletImg[50],
         'isContant': false
     })
@@ -427,6 +458,7 @@ function bulletSet2() {
         setTimeout(bulletSet2, 100)
         setTimeout(bulletSet3, 100)
     } else {
+        bossBullet = []
         setTimeout(bulletSet4, 100)
     }
 }
@@ -451,8 +483,8 @@ function bulletSet3() {
         'y': Math.random() * 810,
         'sizeX': 10,
         'sizeY': 5,
-        'rotate' : 1,
-        'image': bulletImg[55],
+        'rotate': 1,
+        'image': bulletImg[54],
         'isContant': false
     })
 }
@@ -471,11 +503,11 @@ function bulletSet4() {
     bossBullet.push({
         'name': 'bossBullet2',
         'speedX': Math.random() * 1,
-        'speedY': Math.random() * 5 * -1,
+        'speedY': Math.random() * 5 * -1 + 1,
         'x': Math.random() * 510,
         'y': -10,
-        'sizeX': 200,
-        'sizeY': 10,
+        'sizeX': 150,
+        'sizeY': 30,
         'image': bulletImg[35],
         'patternCheck': false,
         'isContant': false
@@ -484,8 +516,145 @@ function bulletSet4() {
     if (drawObject[point].hp > 550) {
         setTimeout(bulletSet4, 500)
     } else {
-        setTimeout(bulletSet2, 600)
+        bossBullet = []
+        setTimeout(bulletSet5, 600, 50)
     }
+}
+
+function bulletSet5(n) {
+    // 패턴 5
+    let point = -1
+
+    for (let i = 0; i < drawObject.length; i += 1) {
+        if (drawObject[i].name === 'boss') {
+            point = i
+            break
+        }
+    }
+
+    bossBullet.push({
+        'name': 'bossBullet3',
+        'speedX': 0,
+        'speedY': -2,
+        'x': n,
+        'y': -20,
+        'sizeX': 20,
+        'sizeY': 20,
+        'rotate': 1,
+        'image': bulletImg[50],
+        'isExplosion': false,
+        'isContant': false
+    })
+
+    if (drawObject[point].hp > 350) {
+        setTimeout(bulletSet5, Math.random() * 300, n + 130 > 500 ? 50 : n + 130)
+    } else {
+        setTimeout(bulletSet6, 2000)
+    }
+}
+
+function bullet3Control(point) {
+    for (let i = 0; i < 6; i++) {
+        setTimeout(ChangeBullet3Image, i * 200, i % 2 == 0 ? 37 : 50, point)
+    }
+
+    setTimeout(bullet3Explosion, 1200, point)
+}
+
+function bullet3Explosion(point) {
+    for (let i = 0; i <= 360; i += 30) {
+        let x = Math.cos(i) * 1.5;
+        let y = Math.sin(i) * 1.5;
+
+        bossBullet.push({
+            'name': 'bossBullet',
+            'speedX': x,
+            // 'speedY': i%60==0?y*1.5:y,
+            'speedY': y,
+            'x': bossBullet[point].x + bossBullet[point].sizeX / 2 - 10,
+            'y': bossBullet[point].y + bossBullet[point].sizeY / 2,
+            'sizeX': 10,
+            'sizeY': 10,
+            'rotate': 1,
+            'image': bulletImg[50],
+            'isContant': false
+        })
+    }
+    bossBullet.splice(point, 1)
+}
+
+function ChangeBullet3Image(imgNum, point) {
+    bossBullet[point].image = bulletImg[imgNum]
+}
+
+function bulletSet6() {
+    // 패턴 6
+    let point = -1
+
+    for (let i = 0; i < drawObject.length; i += 1) {
+        if (drawObject[i].name === 'boss') {
+            point = i
+            break
+        }
+    }
+
+    bossBullet.push({
+        'name': 'bossBullet4',
+        'speedX': 0,
+        'speedY': -2,
+        'x': 225,
+        'y': -20,
+        'sizeX': 50,
+        'sizeY': 50,
+        'rotate': 1,
+        'image': bulletImg[55],
+        'isExplosion': false,
+        'isContant': false
+    })
+
+    if (drawObject[point].hp > 0) {
+        setTimeout(bulletSet6, 4000)
+    }
+}
+
+async function bullet4Explosion() {
+
+    for (let j = 0; j < 10; j++) {
+        bossBullet.forEach(x=>{
+            if(x.name == 'bossBullet4'){
+                x.image = j % 2 == 0 ? bulletImg[55] : bulletImg[52]
+            }
+        })
+        await sleep(100);
+    }
+
+    let point = 0
+
+    for (let i = 0; i < bossBullet.length; i += 1) {
+        if (bossBullet[i].name === 'bossBullet4') {
+            point = i
+            break
+        }
+    }
+
+    for (let i = 0; i <= 360; i += 10) {
+        let x = Math.cos(i) * 0.8;
+        let y = Math.sin(i) * 0.8;
+
+        bossBullet.push({
+            'name': 'bossBullet3',
+            'speedX': x,
+            'speedY': y,
+            'x': bossBullet[point].x + bossBullet[point].sizeX / 2 - 20,
+            'y': bossBullet[point].y + bossBullet[point].sizeY / 2,
+            'sizeX': 20,
+            'sizeY': 20,
+            'rotate': 1,
+            'image': bulletImg[50],
+            'isContant': false
+        })
+    }
+    bossBullet.splice(point, 1)
 }
 
 function isContant() {
@@ -511,13 +680,15 @@ function positionChecking(item, item2) {
             return
         }
         if (item.name == 'player') {
-            if(!(item2.x + item2.sizeX >= item.x + 15 && item2.x <= item.x + item.sizeX - 15 && item2.y + item2.sizeY >= item.y + 25 && item2.y <= item.y + item.sizeY - 25)){
+            if (!(item2.x + item2.sizeX >= item.x + 15 && item2.x <= item.x + item.sizeX - 15 && item2.y + item2.sizeY >= item.y + 25 && item2.y <= item.y + item.sizeY - 25)) {
                 return
             }
+            item.hp -= 1
             document.querySelector('#life').innerHTML = 'life : ' + item.hp
-            score -= ((score-2000)>=0?2000:score)
+            score -= ((score - 2000) >= 0 ? 2000 : score)
             bossBullet = []
         } else {
+            item.hp -= 1
             score += 100
         }
 
@@ -525,7 +696,6 @@ function positionChecking(item, item2) {
         cleaning()
 
         item2.isContant = true;
-        item.hp -= 50
         document.querySelector('#score').innerHTML = 'score : ' + score
 
         if (item.hp <= 0) {
@@ -534,9 +704,12 @@ function positionChecking(item, item2) {
                     drawObject.splice(i, 1);
                 }
                 if (item.name == 'player') {
-                    // player hp가 0 이하면 중지
+                    // player hp가 0 이하면 게임오버
                     gameOver()
-                    document.querySelector('#life').innerHTML = 'Game Over'
+                }
+                if (item.name == 'boss') {
+                    // boss hp가 0 이하면 게임 클리어
+                    gameClear()
                 }
             }
         }
@@ -583,7 +756,7 @@ function bossImageChange(n, replay) {
             replay = false
         }
 
-        setTimeout(bossImageChange, 70, replay ? n - 1 : n + 1, replay)
+        setTimeout(bossImageChange, 100, replay ? n - 1 : n + 1, replay)
     } else if (bossDirection == 2 || bossDirection == 3 || bossDirection == 4 || bossDirection == 5) {
         setTimeout(bossLeftImageChange, 10, 14)
     } else {
@@ -615,4 +788,8 @@ function bossRightImageChange(n) {
     } else {
         bossImageChange(1)
     }
+}
+
+function sleep(ms) {
+    return new Promise((r) => setTimeout(r, ms));
 }
