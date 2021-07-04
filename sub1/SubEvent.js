@@ -692,8 +692,9 @@ function positionChecking(item, item2) {
     // 두 오브젝트의 거리를 구함 
     // Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))
 
-    let point = [[abs(sqrt(sizeX + sizeY)), y],
-                [-1 * abs(sqrt(sizeX + sizeY)), y]]
+    // // 타원의 초점
+    // let point = [[abs(sqrt(sizeX + sizeY)), y],
+    //             [-1 * abs(sqrt(sizeX + sizeY)), y]]
 
     
 
