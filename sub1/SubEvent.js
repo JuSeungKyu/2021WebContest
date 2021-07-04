@@ -620,8 +620,8 @@ function bulletSet6() {
 async function bullet4Explosion() {
 
     for (let j = 0; j < 10; j++) {
-        bossBullet.forEach(x=>{
-            if(x.name == 'bossBullet4'){
+        bossBullet.forEach(x => {
+            if (x.name == 'bossBullet4') {
                 x.image = j % 2 == 0 ? bulletImg[55] : bulletImg[52]
             }
         })
@@ -673,47 +673,73 @@ function isContant() {
     })
 }
 
+//충돌 판정 소스
+    // 전체 충돌 판정
+    // if (!(item2.x + item2.sizeX >= item.x && item2.x <= item.x + item.sizeX && item2.y + item2.sizeY >= item.y && item2.y <= item.y + item.sizeY) || item2.isContant) {
+    //     return
+    // }
+    //
+    // 플레이어 충돌 판정
+    // if (!(item2.x + item2.sizeX >= item.x + 15 && item2.x <= item.x + item.sizeX - 15 && item2.y + item2.sizeY >= item.y + 25 && item2.y <= item.y + item.sizeY - 25)) {
+    //     return
+    // }
+
 function positionChecking(item, item2) {
     // 충돌 판정
-    if (item2.x + item2.sizeX >= item.x && item2.x <= item.x + item.sizeX && item2.y + item2.sizeY >= item.y && item2.y <= item.y + item.sizeY) {
-        if (item2.isContant) {
+
+    // 두 히트박스의 반지름을 더함
+    // (item.sizeX + item.sizeY) / 4 + (item2.sizeX + item2.sizeY) / 4
+    // 두 오브젝트의 거리를 구함 
+    // Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))
+
+    let point = [[abs(sqrt(sizeX + sizeY)), y],
+                [-1 * abs(sqrt(sizeX + sizeY)), y]]
+
+    
+
+    if (item.name == 'player') {
+        if((item.sizeX + item.sizeY) / 40 + (item2.sizeX + item2.sizeY) / 4 < Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))){
             return
         }
-        if (item.name == 'player') {
-            if (!(item2.x + item2.sizeX >= item.x + 15 && item2.x <= item.x + item.sizeX - 15 && item2.y + item2.sizeY >= item.y + 25 && item2.y <= item.y + item.sizeY - 25)) {
-                return
-            }
-            item.hp -= 1
-            document.querySelector('#life').innerHTML = 'life : ' + item.hp
-            score -= ((score - 2000) >= 0 ? 2000 : score)
-            bossBullet = []
-        } else {
-            item.hp -= 1
-            score += 100
+
+        item.hp -= 1
+        document.querySelector('#life').innerHTML = 'life : ' + item.hp
+        score -= ((score - 10000) >= 0 ? 10000 : score)
+        bossBullet = []
+    } else {
+        if((item.sizeX + item.sizeY) / 4 + (item2.sizeX + item2.sizeY) / 4 < Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))){
+            return
         }
 
-        // 충돌된 객체를 바로 지우기 위하여 실행
-        cleaning()
+        item.hp -= 1.5
+        score += 100
+        if (!isBossMove) {
+            item.image = bossImg[Math.round(Math.random()) + 21]
+        }
+    }
 
-        item2.isContant = true;
-        document.querySelector('#score').innerHTML = 'score : ' + score
+    // 충돌된 객체를 바로 지우기 위하여 실행
+    cleaning()
 
-        if (item.hp <= 0) {
-            for (let i = 0; i < drawObject.length; i += 1) {
-                if (drawObject[i].name == item.name) {
-                    drawObject.splice(i, 1);
-                }
-                if (item.name == 'player') {
-                    // player hp가 0 이하면 게임오버
-                    gameOver()
-                }
-                if (item.name == 'boss') {
-                    // boss hp가 0 이하면 게임 클리어
-                    gameClear()
-                }
+    item2.isContant = true;
+    document.querySelector('#score').innerHTML = 'score : ' + score
+
+    if (item.hp <= 0) {
+        for (let i = 0; i < drawObject.length; i += 1) {
+            if (drawObject[i].name == item.name) {
+                drawObject.splice(i, 1);
+            }
+            if (item.name == 'player') {
+                // player hp가 0 이하면 게임오버
+                gameOver()
+            }
+            if (item.name == 'boss') {
+                // boss hp가 0 이하면 게임 클리어
+                gameClear()
             }
         }
     }
+
 }
 
 let bossDirection = 0

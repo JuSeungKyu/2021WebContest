@@ -259,3 +259,55 @@ button:active{
     transition: 0.5s;
     opacity: 0;
 }
+
+@media screen and (max-width:930px) {   
+
+    #content1, #content2, #content3, #content4, #content5{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30% 0;
+        gap: 10%;
+    }
+    
+    .contanier{
+        width: 70%;
+        position: static;
+        transform: none;
+        z-index: 2;
+    }
+
+.contanier h1{
+    font-size: 3rem;
+    letter-spacing: 0.3rem;
+}
+
+.contanier h2{
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
+
+.contanier p{
+    font-size: 0.6rem;
+}
+
+.contanier2{
+    width: 50%;
+    position: static;
+    transform: none;
+    z-index: 2;
+}
+
+.btn-box{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    width: 100%;
+    text-align: center;
+}
+
+}

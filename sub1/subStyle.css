@@ -53,8 +53,8 @@ section{
 }
 
 .title img{
-    width: 20rem;
-    height: 15rem;
+    width: 15rem;
+    height: 10rem;
     object-fit: contain;
     object-position: center;
 }
