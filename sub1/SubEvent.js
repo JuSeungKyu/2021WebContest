@@ -390,6 +390,21 @@ function bulletControl() {
     }
 }
 
+function bossBulletInit(b) {
+    const bCanvas = document.createElement("canvas");
+    const bCtx = bCanvas.getContext('2d');
+
+    bCanvas.width = b.sizeX;
+    bCanvas.height = b.sizeY;
+
+    bCtx.translate(b.sizeX / 2, b.sizeY / 2);
+    bCtx.rotate((b.rotate + 80) * 180 / Math.PI * Math.PI / 180);
+    bCtx.translate(-(b.sizeX / 2), -(b.sizeY / 2));
+    bCtx.drawImage(b.image, 0, 0);
+
+    b.image = bCanvas;
+}
+
 function bulletSet1() {
     // 패턴 1
     let point = 0;
@@ -402,22 +417,25 @@ function bulletSet1() {
     }
 
     // 원형으로 발사
-    for (let i = parseInt(Math.random() * 10); i <= 360; i += 10) {
-        let x = Math.cos(i) * 3.5;
-        let y = Math.sin(i) * 3.5;
+    for (let i = Math.random() * 10; i <= 360; i += 10) {
+        x = Math.cos(i) * 3.5;
+        y = Math.sin(i) * 3.5;
 
-        bossBullet.push({
+        const bullet = {
             'name': 'bossBullet',
             'speedX': x,
             'speedY': y,
             'x': drawObject[point].x + drawObject[point].sizeX / 2 - 8,
             'y': drawObject[point].y + drawObject[point].sizeY / 2,
-            'sizeX': 20,
-            'sizeY': 20,
+            'sizeX': 15,
+            'sizeY': 30,
             'rotate': i,
-            'image': bulletImg[32],
-            'isContant': false
-        })
+            'image': bulletImg[133],
+            'isContant': false,
+            'bImage': ''
+        };
+        bossBulletInit(bullet);
+        bossBullet.push(bullet);
     }
 
     if (drawObject[point].hp > 1050) {
@@ -712,7 +730,7 @@ function positionChecking(item, item2) {
             return
         }
 
-        item.hp -= 1.5
+        item.hp -= 1.2
         score += 100
         if (!isBossMove) {
             item.image = bossImg[Math.round(Math.random()) + 21]

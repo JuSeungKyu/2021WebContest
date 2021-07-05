@@ -72,12 +72,12 @@ header li a{
 
 #news{
     width: 100%;
-    padding: 5% 10%;
+    padding: 5% 20%;
     text-align: center;
 }
 
 #news h1{
-    font-size: 1.7rem;
+    font-size: 1.7vw;
 }
 
 #news>article{
@@ -90,7 +90,7 @@ header li a{
 
 #news .box{
     padding: 4%;
-    height: 15rem;
+    height: 15vw;
     border: 1px solid rgba(0, 0, 0, 0.398);
     color: black;
     text-align: left;
@@ -104,7 +104,7 @@ header li a{
 
 #news .box h2{
     position: absolute;
-    font-size: 1rem;
+    font-size: 0.9vw;
     padding-right: .5rem;
 }   
 
@@ -112,69 +112,71 @@ header li a{
     position: absolute;
     bottom: 1rem;
     color: gray;
-    font-size: 0.7rem;
+    font-size: 0.5vw;
 }   
 
 #introduction{
-    padding: 5%;
+    padding: 5% 20%;
     display: flex;
     justify-content: space-between;
     background-color: #E6EBF1;
 }
 
 #introduction .title{
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
 #introduction .title h1{
-    font-size: 2vw;
+    font-size: 1.4vw;
 }
 
 #introduction .title h2{
-    font-size: 1vw;
+    font-size: 0.7vw;
 }
 
 #introduction .title img{
-    width: 40vw;
+    width: 100%;
     height: 20vw;
     object-fit: contain;
 }
 
 #introduction .contant{
-    width: 42vw;
-    height: 28vw;
+    width: 50%;
+    height: 19vw;
+    gap: 0.1vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 
 #introduction .card{
-    height: 14vw;
-    width: 14vw;
+    height: 100%;
+    width: 100%;
     position: relative;
 }
 
 #introduction .card img{
     object-fit: contain;
-    width: 6vw;
-    height: 6vw;
+    width: 4vw;
+    height: 4vw;
     position: absolute;
-    bottom: 2rem;
+    bottom: 1vw;
 }
 
 #introduction h3{
     position: absolute;
-    top: 2rem;
-    font-size: 1.2vw;
+    top: 2vw;
+    font-size: 0.9vw;
 }
 
 #introduction p{
     position: absolute;
-    bottom: 2rem;
+    bottom: 1vw;
     padding: 0.9rem;
-    font-size: 1vw;
+    font-size: 0.5vw;
 }
 
 #introduction .front{
@@ -209,6 +211,34 @@ header li a{
     display: flex;
 }
 
+footer{
+    width: 100vw;
+    height: 5vw;
+    padding: 1vw 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4vw;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+footer img{
+    height: 100%;
+    object-fit: cover;
+}
+
+footer a{
+    color: gray;
+}
+
+footer a:hover{
+    color: rgb(182, 182, 182);
+}
+
+footer p{
+    font-size: 0.6vw;
+}
+
 @media screen and (max-width:700px) {
     header{
         height: 5vw;
@@ -224,10 +254,12 @@ header li a{
     }
 
     body{
-        min-width: 0;
+        max-width: 100vw;
+        overflow-x: hidden;/
     }   
 
     #visual{
+        width: 100vw;
         height: 100vw;
     }
 
@@ -239,6 +271,11 @@ header li a{
     #visual h2{
         font-size: 2vw;
         margin-bottom: 2rem;
+    }
+
+    #news{
+        max-width: 100vw;
+        padding: 10% 5%;
     }
 
     #news h1{
@@ -256,7 +293,7 @@ header li a{
 
     #news .box{
         padding: 4%;
-        height: 40vw;
+        height: 30vw;
         border: 1px solid rgba(0, 0, 0, 0.398);
         color: black;
         text-align: left;
@@ -266,7 +303,7 @@ header li a{
 
     #news .box h2{
         position: absolute;
-        font-size: 3vw;
+        font-size: 1.5vw;
         padding-right: 0.5vw;
     }   
 
@@ -277,7 +314,10 @@ header li a{
     }    
 
     #introduction{
+        width: 100vw;
+        padding: 10% 0%;
         text-align: center;
+        align-items: center;
         flex-direction: column;
         gap: 50px;
     }
@@ -285,7 +325,8 @@ header li a{
     #introduction .title img{
         width: 80vw;
         height: 50vw;
-        margin-left: 10vw;
+        position: relative;
+        right: 10vw;
     }
 
     #introduction .title h1{
@@ -293,43 +334,42 @@ header li a{
     }
 
     #introduction .title h2{
-        font-size: 3vw;
+        font-size: 1.8vw;
     }
 
     #introduction .contant{
-        width: 100%;
-        height: 105vw;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        width: 70%;
+        height: 100vw;
+        display: grid;
         margin-bottom: 100px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
     }
 
     #introduction .card{
+        width: 100%;
         border: 1px solid rgb(226, 226, 226);
-        height: 35vw;
-        width: 35vw;
         position: relative;
     }
     
     #introduction .card img{
         object-fit: contain;
-        width: 4rem;
-        height: 4rem;
+        width: 10vw;
+        height: 10vw;
         position: absolute;
         bottom: 2rem;
     }
     
     #introduction h3{
         position: absolute;
-        top: 2rem;
-        font-size: 3vw;
+        top: 4vw;
+        font-size: 2vw;
     }
     
     #introduction p{
         position: absolute;
-        bottom: 2rem;
+        bottom: 4vw;
         padding: 0.9rem;
-        font-size: 1vw;
+        font-size: 0.7vw;
     }
 }

@@ -229,3 +229,32 @@ header li a{
     background-image: linear-gradient(#E6EBF100, #E6EBF1 10% 90%, #E6EBF100);
     grid-template-rows: repeat(5, 1fr);
 }
+
+footer{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 5vw;
+    width: 100vw;
+    height: 5vw;
+    padding: 1vw 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4vw;
+}
+
+footer img{
+    height: 100%;
+    object-fit: cover;
+}
+
+footer a{
+    color: gray;
+}
+
+footer a:hover{
+    color: rgb(182, 182, 182);
+}
+
+footer p{
+    font-size: 0.6vw;
+}
