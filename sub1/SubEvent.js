@@ -431,8 +431,7 @@ function bulletSet1() {
             'sizeY': 30,
             'rotate': i,
             'image': bulletImg[133],
-            'isContant': false,
-            'bImage': ''
+            'isContant': false
         };
         bossBulletInit(bullet);
         bossBullet.push(bullet);
