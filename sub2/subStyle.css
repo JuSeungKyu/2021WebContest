@@ -5,44 +5,7 @@
 }
 
 body{
-    min-width: 75rem;
-}
 
-header{
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    height: 2rem;
-    background-color: rgba(213, 213, 213, 0.7);
-}
-
-header ul{
-    width: 50%;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header li{
-    font-size: 0.9rem;
-    width: 33%;
-    text-align: center;
-    position: relative;
-    color: rgba(0, 0, 0, 0.671);
-}
-
-header li a{
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.header-span{
-    position: absolute;
-    right: 0;
 }
 
 #visual{
@@ -211,34 +174,6 @@ header li a{
     display: flex;
 }
 
-footer{
-    width: 100vw;
-    height: 5vw;
-    padding: 1vw 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4vw;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-footer img{
-    height: 100%;
-    object-fit: cover;
-}
-
-footer a{
-    color: gray;
-}
-
-footer a:hover{
-    color: rgb(182, 182, 182);
-}
-
-footer p{
-    font-size: 0.6vw;
-}
-
 @media screen and (max-width:700px) {
     header{
         height: 5vw;
@@ -255,7 +190,7 @@ footer p{
 
     body{
         max-width: 100vw;
-        overflow-x: hidden;/
+        overflow-x: hidden;
     }   
 
     #visual{
@@ -303,14 +238,14 @@ footer p{
 
     #news .box h2{
         position: absolute;
-        font-size: 1.5vw;
+        font-size: 2.5vw;
         padding-right: 0.5vw;
     }   
 
     #news .box p{
         position: absolute;
         bottom: 2vw;
-        font-size: 1vw;
+        font-size: 2vw;
     }    
 
     #introduction{
@@ -334,7 +269,7 @@ footer p{
     }
 
     #introduction .title h2{
-        font-size: 1.8vw;
+        font-size: 2.5vw;
     }
 
     #introduction .contant{
@@ -363,13 +298,15 @@ footer p{
     #introduction h3{
         position: absolute;
         top: 4vw;
-        font-size: 2vw;
+        font-size: 3vw;
     }
     
     #introduction p{
         position: absolute;
         bottom: 4vw;
         padding: 0.9rem;
-        font-size: 0.7vw;
+        font-size: 2.3vw;
     }
+
+
 }

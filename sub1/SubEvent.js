@@ -21,7 +21,7 @@ const backgroundImage = new Image()
 window.onload = () => {
 
     img1.src = "imgs/img.jpg"
-    backgroundImage.src = "./imgs/bg2.png"
+    backgroundImage.src = "./imgs/bg1.png"
     for (let i = 1; i <= 24; i += 1) {
         // 플레이어 사진 준비
         let img = new Image()

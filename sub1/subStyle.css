@@ -4,44 +4,10 @@
     box-sizing: border-box;
 }
 
-header{
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    height: 2rem;
-    background-color: rgba(213, 213, 213, 0.7);
-}
-
-header ul{
-    width: 40%;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header li{
-    font-size: 0.9rem;
-    width: 50%;
-    text-align: center;
-    position: relative;
-    color: rgba(0, 0, 0, 0.671);
-}
-
-header li a{
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.header-span{
-    position: absolute;
-    right: 0;
-}
-
 section{
+    width: 100%;
+    max-width: 85rem;
+    margin: auto;
     padding: 2.5rem 10%;
 }
 
@@ -86,7 +52,6 @@ section{
     object-fit: contain;
 }
 
-
 .explanation>div{
     display: flex;
     flex-direction: column;
@@ -98,10 +63,10 @@ section{
 }
 
 .explanation h2{
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2vw;
+    margin-bottom: 0.5vw;
 }
 
 .explanation p{
-    font-size: 0.8rem;
+    font-size: 0.6vw;
 }

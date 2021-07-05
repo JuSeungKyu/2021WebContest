@@ -4,27 +4,27 @@ function scrool_check() {
 
     let scroll = current_scroll / web_height
 
-    if (scroll >= 0 && scroll <= 0.09 && !a) {
+    if (scroll >= 0 && scroll <= 0.15 && !a) {
         allOff()
         a = true;
         setTimeout(content1On(), 1000);
     }
-    else if (scroll > 0.09  && scroll <= 0.18 && !b) {
+    else if (scroll > 0.15  && scroll <= 0.3 && !b) {
         allOff()
         b = true;
         setTimeout(content2On(), 1000);
     }
-    else if (scroll > 0.18  && scroll <= 0.27 && !c) {
+    else if (scroll > 0.3  && scroll <= 0.45 && !c) {
         allOff()
         c = true;
         setTimeout(content3On(), 1000);
     }
-    else if (scroll > 0.27  && scroll <= 0.36 && !d) {
+    else if (scroll > 0.45  && scroll <= 0.6 && !d) {
         allOff()
         d = true;
         setTimeout(content4On(), 1000);
     }
-    else if (scroll > 0.36  && scroll <= 0.45 && !e) {
+    else if (scroll > 0.6 && !e) {
         allOff()
         e = true;
         setTimeout(content5On(), 1000);
