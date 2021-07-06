@@ -186,6 +186,28 @@ body{
     transition: 0.4s;
 }
 
+.introduction .big-box1{
+    height: 50vw;
+    max-height: 34rem;
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.introduction .big-box1{
+    height: 56.5vw;
+    max-height: 34rem;
+}
+
+.introduction .big-box2{
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+.introduction .big-box3{
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
 .introduction .box:hover{
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
@@ -216,8 +238,10 @@ body{
 
 #new{
     grid-template-rows: repeat(6, 1fr);
+    row-gap: 2%;
 }
 
 #extra{
     grid-template-rows: repeat(6, 1fr);
+    row-gap: 2%;
 }
