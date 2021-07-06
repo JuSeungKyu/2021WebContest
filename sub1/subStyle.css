@@ -15,7 +15,7 @@ section{
     display: flex;
     align-items: center;
     gap: 2%;
-    font-size: 1rem;
+    font-size: 0.8vw;
 }
 
 .title img{
@@ -60,10 +60,11 @@ section{
 
 .explanation li{
     margin: 1rem;
+    font-size: 0.8vw;
 }
 
 .explanation h2{
-    font-size: 1.2vw;
+    font-size: 1vw;
     margin-bottom: 0.5vw;
 }
 

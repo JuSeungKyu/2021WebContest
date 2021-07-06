@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>동방-소개</title>
     <link rel="stylesheet" href="./subStyle.css">
     <link rel="stylesheet" href="../source/header.css">
@@ -26,18 +25,30 @@
             <li><a href="https://touhou-project.news/yomoyama_news/">동방 세상만사뉴스</a></li>
         </ul>
     </header>
-    
+
     <section id="visual">
-        <div>
+        <input type="radio" name="visual-radio" checked>
+        <input type="radio" name="visual-radio">
+        <input type="radio" name="visual-radio" checked>
+        <div class="fliter"></div>
+        <img src="../source/55027268_p0_master1200.jpg" alt="비주얼 이미지">
+        <img src="../source/dd.jpg" alt="비주얼 이미지">
+        <!-- 메모)) 여기 비주얼 사진 편집해야함 -->
+        <img src="../source/57369dc97b5b03368a3d72e9d800fc23.png" alt="비주얼 이미지">
+        <div class="text">
             <h1>
-                동방프로젝트 소개
+                동방프로젝트를 알아봅시다
             </h1>
-            <h2>
-                탄막게임 동방 프로젝트에 대해 알아봅시다
-            </h2>
+            <p>
+                어디선가 들어본, 혹은 듣도 보도 못한 동방프로젝트에 대해서 알아보는 시간을 가지고
+                동방프로젝트에 관한 새소식도 함께 알아봅시다
+            </p>
+            <button onclick = "location.href = '../sub1/sub.html'">
+                체험하기
+            </button>
         </div>
     </section>
-
+    
     <section id="news">
         <h1>새소식</h1>
         <article>
@@ -59,12 +70,6 @@
                     <p>2021-06-25</p>
                 </div>
             </a>
-            <a target=”_blank” href="https://touhou-project.news/news/4594/">
-                <div class="box">
-                    <h2>동방 Project × 코픽 색칠 공부 캠페인 개최!</h2>
-                    <p>2021-06-21</p>
-                </div>
-            </a>
         </article>
     </section>
 
@@ -74,7 +79,7 @@
                 동방 프로젝트 소개
             </h1>
             <h2>
-                어디선가 들어봤던, 혹은 듣도보도 못했던 동방 프로젝트에 대해 알아봅시다<br>
+                알아도 쓸모없지만 재미있는 동방 프로젝트에 대해 알아봅시다.
                 
             </h2>
             <img src="../sub1/imgs/레이센-클라운.png" alt="달나라 사는 클라운 때리맥이는 이미지">
@@ -147,13 +152,13 @@
             </div>
             <div class="card">
                 <div class="front">
-                    <h3>제목</h3>
+                    <h3>주인공</h3>
                     <img src="./imgs/images/dot_100.png" alt="이미지">
                 </div>
                 <div class="back">
-                    <h3>제목</h3>
+                    <h3>주인공</h3>
                     <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing.
+                        주인공은 하쿠레이 레이무이다.
                     </p>
                 </div>
             </div>
