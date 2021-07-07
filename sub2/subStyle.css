@@ -110,9 +110,9 @@
 
 #news{
     width: 100%;
-    height: 40rem;
+    height: 50rem;
     padding: 5% 15%;
-    gap: 20%;
+    gap: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,15 +124,18 @@
 }
 
 #news>article{
-    height: 10rem;
+    height: 30rem;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 5%;
+    row-gap: 10%;
     justify-content: space-between;
 }
 
 #news>article a{
     width: 30%;
-    height: 100%;
+    height: 40%;
     text-decoration: none;
     color: transparent;
     color: rgb(29, 29, 29);
@@ -388,4 +391,263 @@
 
 #other h3{
 
+}
+
+@media screen and (max-width:700px) {
+    
+#visual{
+    width: 100%;
+    height: 95vh;
+}
+
+#visual>.text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+
+    width: 70%;
+}
+
+#visual>input:nth-of-type(1){
+    position: absolute;
+    left: 46%;
+    bottom: 5%;
+}
+#visual>input:nth-of-type(2){
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+}
+#visual>input:nth-of-type(3){
+    position: absolute;
+    left: 54%;
+    bottom: 5%;
+}
+
+#visual>img{
+    object-position: center 15%;
+}
+
+    #news{
+        height: 50rem;
+        padding: 5% 15%;
+        gap: 5%;
+    }
+    
+    #news h1{
+        font-size: 5vw;
+    }
+    
+    #news>article{
+        height: 30rem;
+    }
+    
+    #news>article a{
+        width: 40%;
+        height: 30%;
+    }
+
+    .box:hover:before{
+        background-color: #94bfff;
+    }
+
+    #introduction{
+        flex-direction: column;
+        background-color: #F0F4F8;
+    }
+    
+    #introduction .title{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #introduction .title h1{
+        font-size: 5vw;
+    }
+    
+    #introduction .title h2{
+        text-align: center;
+        font-size: 1.7vw;
+    }
+    
+    #introduction .title img{
+        height: 20vw;
+        position: relative;
+        left: 5vw;
+    }
+    
+    #introduction .contant{
+        margin-top: 10vw;
+        width: 100%;
+        height: 80vw;
+        gap: 0.1vw;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    
+    #introduction .card{
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+    
+    #introduction .card img{
+        object-fit: contain;
+        width: 10vw;
+        height: 10vw;
+        position: absolute;
+        bottom: 1.5vw;
+    }
+    
+    #introduction h3{
+        position: absolute;
+        top: 5vw;
+        font-size: 2.2vw;
+    }
+    
+    #introduction p{
+        position: absolute;
+        bottom: 1vw;
+        padding: 0.9rem;
+        font-size: 0.4vw;
+    }
+    
+    #introduction .front{
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    
+    #introduction .back{
+        color: white;
+        background-color: #5C3EDB;
+        display: none;
+        flex-direction: column;
+        justify-content: bottom;
+        align-items: center;
+        position: absolute;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+    }
+    
+    #introduction .card:hover .front{
+        display: none;
+    }
+    
+    #introduction .card:hover .back{
+        display: flex;
+    }
+    
+#numerical{
+    width: 100%;
+    height: 30rem;
+    padding: 5%;
+}
+
+#numerical>h1{
+    text-align: center;
+    font-size: 5vw;
+}
+
+#numerical>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+}
+
+#numerical h2{
+    color: #2c7ae7;
+}
+
+#circle{
+    width: 14rem;
+    height: 14rem;
+    position: relative;
+}
+
+#circle1{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.178);
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 20%;
+    bottom: 5%;
+    background-color: white;
+    z-index: 5;
+}
+
+#circle1 h2{
+    font-size: 2rem;
+}
+#circle1 h3{
+    font-size: 0.9rem;
+}
+
+#circle2{
+    overflow: hidden;
+    position: absolute;
+    left: 0%;
+    top: 5%;
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    background-color: #2c7ae7;
+    z-index: 3;
+}
+
+#circle3{
+    position: absolute;
+    left: -15%;
+    bottom: -29%;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    background-color: #4288E9;
+}
+
+#circle4{
+    position: absolute;
+    left: 10%;
+    bottom: -25%;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    background-color: #5C98EA;
+}
+
+#other{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#other h2{
+    font-size: 1.9rem;
+}
+
+#other h3{
+    font-size: 1rem;
+}
+    
+    
 }

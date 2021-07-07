@@ -169,6 +169,8 @@ body{
 }
 
 #old{
+    height: 108vw;
+    max-height: 75.6rem;
     grid-template-rows: repeat(2, 1fr);
 }
 
@@ -237,6 +239,8 @@ body{
 }
 
 #new{
+    height: 228vw;
+    max-height: 130rem;
     grid-template-rows: repeat(6, 1fr);
     row-gap: 2%;
 }
@@ -244,4 +248,42 @@ body{
 #extra{
     grid-template-rows: repeat(6, 1fr);
     row-gap: 2%;
+}
+
+@media screen and (max-width:700px) {
+    
+    #visual{
+        width: 100%;
+        height: 95vh;
+    }
+    
+    #visual>.text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+    
+        width: 70%;
+    }
+    
+    #visual>input:nth-of-type(1){
+        position: absolute;
+        left: 46%;
+        bottom: 5%;
+    }
+    #visual>input:nth-of-type(2){
+        position: absolute;
+        left: 50%;
+        bottom: 5%;
+    }
+    #visual>input:nth-of-type(3){
+        position: absolute;
+        left: 54%;
+        bottom: 5%;
+    }
+    
+    #visual>img{
+        object-position: center 15%;
+    }
 }

@@ -27,7 +27,7 @@ function number_up(e, n){
     // 100 = a(10000-5000)^2+10
     // 90a = 2,500,000
     // console.log((9/8000000)*(n-5000)*(n-5000)+10)
-    setTimeout(number_up, Math.round((9/8000000)*(n-5000)*(n-5000)+10), e, n+Math.round(e.dataset.number*40 / (n<5000?5000:n*3)))
+    setTimeout(number_up, Math.round(((9/8000000)*(n-5000)*(n-5000)+10)/10), e, n+Math.round(e.dataset.number*40 / (n<5000?5000:n*3)))
 }
 
 

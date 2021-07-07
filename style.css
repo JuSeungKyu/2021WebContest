@@ -32,6 +32,7 @@ img{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap:5%
 }
 
 .background{
@@ -117,21 +118,49 @@ img{
 }
 
 button{
-    width: 45%;
-    height: 3rem;
-    border-radius: 1rem;
     border: none;
-    background-image: linear-gradient(160deg, rgb(211, 130, 130) 0% 30%, rgb(255, 255, 255) 30% 100%)
 }
+
+#content1 button{
+    width: 12vw;
+    height: 3vw;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgb(0, 0, 0);
+    transition: 0.2s;
+    overflow: hidden;
+    position: relative;
+}
+
+#content1 button:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#content1 button::before{
+    position: absolute;
+    content: "";
+    width: 17vw;
+    height: 17vw;
+    border-radius: 50%;
+    background-color: #db7777;
+    transition: 0.4s;
+}
+
+#content1 button:hover:before{
+    background-color: #d53f3f;
+}
+#content1 button:active:before{
+    background-color: #eea4a4;
+}
+
 
 button:hover{
-    background-image: linear-gradient(160deg, rgba(211, 130, 130, 0.5) 0% 30%, rgba(255, 255, 255, 1) 30% 100%)
+    cursor: pointer;
+    background-color: transparent;
+    color: black;
+    background-color: white;
 }
-
-button:active{
-    background-image: linear-gradient(160deg, rgba(211, 130, 130, 0.3) 0% 30%, rgba(255, 255, 255, 1) 30% 100%)
-}
-
 #content1>*:not(.background){
     transition: 0.5s;
     opacity: 0;
@@ -310,7 +339,7 @@ button:active{
 
 .btn-box{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 button{

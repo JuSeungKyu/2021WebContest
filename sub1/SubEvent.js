@@ -690,7 +690,7 @@ function isContant() {
     })
 }
 
-//충돌 판정 소스
+//예전 충돌 판정 소스
     // 전체 충돌 판정
     // if (!(item2.x + item2.sizeX >= item.x && item2.x <= item.x + item.sizeX && item2.y + item2.sizeY >= item.y && item2.y <= item.y + item.sizeY) || item2.isContant) {
     //     return
@@ -702,11 +702,11 @@ function isContant() {
     // }
 
 function positionChecking(item, item2) {
-    // 충돌 판정
+    // // 충돌 판정
 
-    // 두 히트박스의 반지름을 더함
+    // // 두 히트박스의 반지름을 더함
     // (item.sizeX + item.sizeY) / 4 + (item2.sizeX + item2.sizeY) / 4
-    // 두 오브젝트의 거리를 구함 
+    // // 두 오브젝트의 거리를 구함 
     // Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))
 
     // // 타원의 초점
@@ -729,7 +729,7 @@ function positionChecking(item, item2) {
             return
         }
 
-        item.hp -= 1.2
+        item.hp -= 100
         score += 100
         if (!isBossMove) {
             item.image = bossImg[Math.round(Math.random()) + 21]
@@ -747,11 +747,12 @@ function positionChecking(item, item2) {
             if (drawObject[i].name == item.name) {
                 drawObject.splice(i, 1);
             }
+            
             if (item.name == 'player') {
                 // player hp가 0 이하면 게임오버
                 gameOver()
             }
-            if (item.name == 'boss') {
+            else if (item.name == 'boss') {
                 // boss hp가 0 이하면 게임 클리어
                 gameClear()
             }
