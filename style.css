@@ -121,9 +121,14 @@ button{
     border: none;
 }
 
+#content1 button p{
+    z-index: 1000;
+    position: relative;
+}
+
 #content1 button{
-    width: 12vw;
-    height: 3vw;
+    width: 12rem;
+    height: 3rem;
     border-radius: 10px;
     border: none;
     background-color: rgba(255, 255, 255, 0.8);
@@ -138,10 +143,11 @@ button{
 }
 
 #content1 button::before{
+    z-index: 1;
     position: absolute;
     content: "";
-    width: 17vw;
-    height: 17vw;
+    width: 13rem;
+    height: 13rem;
     border-radius: 50%;
     background-color: #db7777;
     transition: 0.4s;
