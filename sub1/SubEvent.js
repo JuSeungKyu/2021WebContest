@@ -11,6 +11,7 @@ let bossBullet = []
 let inputKey = []
 let isStart = false;
 let interval = []
+let attackPower = 1;
 
 const playerImg = []
 const bossImg = []
@@ -19,6 +20,10 @@ const img1 = new Image()
 const backgroundImage = new Image()
 
 window.onload = () => {
+    attackPower = parseFloat(document.querySelector('#attack-power').value)
+    document.querySelector('#attack-power').addEventListener('change', ()=>{
+        attackPower = parseFloat(document.querySelector('#attack-power').value)
+    })
 
     img1.src = "imgs/img.jpg"
     backgroundImage.src = "./imgs/bg1.png"
@@ -728,8 +733,7 @@ function positionChecking(item, item2) {
         if((item.sizeX + item.sizeY) / 4 + (item2.sizeX + item2.sizeY) / 4 < Math.sqrt(Math.pow(item.x + item.sizeX/2 - (item2.x + item2.sizeX/2), 2) + Math.pow(item.y + item.sizeY/2 - (item2.y + item2.sizeY/2), 2))){
             return
         }
-
-        item.hp -= 100
+        item.hp -= attackPower
         score += 100
         if (!isBossMove) {
             item.image = bossImg[Math.round(Math.random()) + 21]

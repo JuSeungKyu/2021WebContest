@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>동방-게임</title>
-    
-    <style>  
-        body{
+
+    <style>
+        body {
             background-color: black;
             min-height: 99vh;
             max-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
@@ -19,17 +21,20 @@
             background-size: cover;
             background-position: bottom;
         }
-        #game{
+
+        #game {
             width: 800px;
             display: flex;
         }
-        canvas{
+
+        canvas {
             color: #070719;
             background-image: url(./imgs/bg1.png);
             background-color: white;
             border: 1px solid black;
         }
-        #interface{
+
+        #interface {
             background-image: linear-gradient(rgba(156, 156, 156, 0.2), rgba(156, 156, 156, 0.2)), url(../source/Remilia\ Scarlet.gif);
             background-position-y: center;
             width: 300px;
@@ -38,13 +43,19 @@
             align-items: center;
             justify-content: center;
         }
-        #interface P{
+
+        #interface P {
             color: white;
             font-size: 2rem;
             text-align: center;
         }
+
+        #attack-power {
+            width: 10rem;
+        }
     </style>
 </head>
+
 <body>
     <section id="game">
         <canvas id="tutorial" width="500" height="700"></canvas>
@@ -53,8 +64,17 @@
             <p id="life">life : 5</p>
             <p id="explanation">Z를 눌러 시작이나<br>
                 공격을 해주세요</p>
+            <select name="" id="attack-power">
+                <optgroup>
+                    <option value="1" selected>1(기본)</option>
+                    <option value="1.5">1.5(쉬움)</option>
+                    <option value="3">3(매우 쉬움)</option>
+                    <option value="5">5(테스트용)</option>
+                </optgroup>
+            </select>
         </div>
     </section>
     <script src="./SubEvent.js"></script>
 </body>
+
 </html>
