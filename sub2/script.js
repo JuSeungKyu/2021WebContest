@@ -3,7 +3,7 @@ function scrool_check() {
     let scroll_bottom = document.querySelector('html').scrollTop + window.innerHeight
     
     let scroll = scroll_bottom / web_height
-    if(scroll >= 0.84){
+    if(scroll >= 0.7){
         clearInterval(interval)
         section_in()
     }
